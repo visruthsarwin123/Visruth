@@ -1,0 +1,676 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard - Career Web App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .sidebar {
+      min-width: 220px;
+      background: #f8fafc;
+      border-radius: 1.5rem;
+      padding: 32px 16px 16px 16px;
+      height: 100vh;
+      box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.07);
+    }
+    .sidebar .nav-link {
+      color: #64748b;
+      font-weight: 500;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover {
+      background: #e0e7ff;
+      color: #6366f1;
+    }
+    .sidebar .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 18px;
+    }
+    .main-content {
+      flex: 1 1 0;
+      padding: 32px 32px 32px 0;
+      min-width: 0;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .search-bar {
+      background: #f1f5f9;
+      border-radius: 24px;
+      padding: 8px 18px;
+      border: none;
+      width: 320px;
+      font-size: 1rem;
+    }
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e0e7ff;
+    }
+    .card-course {
+      background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
+      color: #fff;
+      border-radius: 1.2rem;
+      padding: 32px 32px 24px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 24px 0 rgba(99, 102, 241, 0.08);
+    }
+    .category-btn {
+      background: #f1f5f9;
+      color: #6366f1;
+      border-radius: 18px;
+      padding: 6px 18px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-right: 8px;
+      border: none;
+      margin-bottom: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .category-btn.active, .category-btn:hover {
+      background: #6366f1;
+      color: #fff;
+    }
+    .card-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 1rem;
+      margin-bottom: 10px;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 1.2rem;
+      padding: 18px 18px 12px 18px;
+      box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.06);
+      margin-bottom: 18px;
+    }
+    .mentor-pic {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    @media (max-width: 1100px) {
+      .main-content { padding: 24px 4px 24px 0; }
+      .sidebar { min-width: 0; padding: 18px 4px; }
+    }
+    @media (max-width: 900px) {
+      .dashboard-flex { flex-direction: column; }
+      .sidebar { height: auto; margin-bottom: 24px; }
+      .main-content { padding: 0; }
+    }
+  </style>
+</head>
+<body class="bg-animated">
+  <div class="d-flex dashboard-flex" style="min-height:100vh;">
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column justify-content-between">
+      <div>
+        <div class="sidebar-title mb-4">Courseu</div>
+        <a href="#" class="nav-link active"><i class="fas fa-th-large me-2"></i>Dashboard</a>
+        <a href="#" class="nav-link" id="inboxSidebar"><i class="fas fa-inbox me-2"></i>Inbox</a>
+        <a href="#" class="nav-link"><i class="fas fa-book-open me-2"></i>Lesson</a>
+        <a href="#" class="nav-link" id="taskSidebar"><i class="fas fa-tasks me-2"></i>Task</a>
+        <a href="#" class="nav-link"><i class="fas fa-users me-2"></i>Group</a>
+        <div class="sidebar-title mt-4 mb-2">Friends</div>
+        <div class="d-flex align-items-center mb-2 friend-item" data-name="Bayas Makpie" data-img="https://randomuser.me/api/portraits/men/32.jpg" data-email="bayas.makpie@email.com" data-location="London, UK"> Bayas Makpie</div>
+        <div class="d-flex align-items-center mb-2 friend-item" data-name="Shorany" data-img="https://randomuser.me/api/portraits/women/44.jpg" data-email="shorany@email.com" data-location="Paris, France"> Shorany</div>
+        <div class="d-flex align-items-center mb-2 friend-item" data-name="Joan Yosan" data-img="https://randomuser.me/api/portraits/men/45.jpg" data-email="joan.yosan@email.com" data-location="Berlin, Germany"> Joan Yosan</div>
+        <div class="d-flex align-items-center mb-2 friend-item" data-name="Alex Turner" data-img="https://randomuser.me/api/portraits/men/46.jpg" data-email="alex.turner@email.com" data-location="New York, USA"> Alex Turner</div>
+        <div class="d-flex align-items-center mb-2 friend-item" data-name="Priya Sharma" data-img="https://randomuser.me/api/portraits/women/47.jpg" data-email="priya.sharma@email.com" data-location="Mumbai, India"> Priya Sharma</div>
+        <div class="d-flex align-items-center mb-2 friend-item" data-name="Michael Chen" data-img="https://randomuser.me/api/portraits/men/48.jpg" data-email="michael.chen@email.com" data-location="Beijing, China"> Michael Chen</div>
+      </div>
+      <div>
+        <div class="sidebar-title mb-2">Settings</div>
+        <a href="#" class="nav-link"><i class="fas fa-cog me-2"></i>Setting</a>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Bar -->
+      <div class="topbar">
+        <input class="search-bar" id="courseSearch" placeholder="Search your course...">
+        <button id="goToEducate" class="btn btn-outline-primary ms-2"><i class="fas fa-graduation-cap"></i> Educate Page</button>
+        <div class="d-flex align-items-center gap-3">
+          <div style="position:relative;">
+            <i class="fas fa-bell fa-lg text-gray-400 me-3" id="notifBell" style="cursor:pointer;"></i>
+            <span id="notifDot" style="display:none;position:absolute;top:2px;right:10px;width:12px;height:12px;background:#2563eb;border-radius:50%;border:2px solid #fff;"></span>
+          </div>
+          <div id="profileSection" style="cursor:pointer;display:flex;align-items:center;gap:8px;" data-bs-toggle="modal" data-bs-target="#profileModal">
+            <span class="fw-bold" id="sidebarProfileName">Jason Ranzi</span>
+          </div>
+        </div>
+      </div>
+      <!-- PeerConnect Bar -->
+      <div class="mb-4">
+        <div class="peerconnect-bar d-flex align-items-center justify-content-between p-3 rounded shadow" style="background: linear-gradient(90deg, #0ea5e9 60%, #38bdf8 100%); color: #fff;">
+          <div class="fw-bold fs-5"><i class="fas fa-users me-2"></i>PeerConnect: Connect & Collaborate with Your Peers!</div>
+          <button class="btn btn-light text-primary fw-bold px-4 py-2" onclick="window.location.href='group.html'">Go to PeerConnect</button>
+        </div>
+      </div>
+      <!-- Categories -->
+      <div class="mb-4">
+        <button class="category-btn active">UI/UX Design</button>
+        <button class="category-btn">Branding</button>
+        <button class="category-btn">FrontEnd</button>
+      </div>
+      <!-- Continue Watching -->
+      <div class="mb-4">
+        <div class="fw-bold mb-2">Continue Watching</div>
+        <div class="row g-3" id="continueWatching">
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Beginner's%20Guide%20to%20Becoming%20a%20Professional%20Front-End%20Developer&video=https://www.youtube.com/embed/Ke90Tje7VS0&details=12%20Lessons%20%E2%80%A2%20In%20Progress" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/people-working-late-office_1098-15706.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Beginner's Guide to Becoming a Professional Front-End Developer</div>
+                <div class="text-muted small mb-1">12 Lessons</div>
+                <span class="badge bg-primary">In Progress</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Optimizing%20User%20Experience%20with%20the%20Best%20UI%2FUX%20Design&video=https://www.youtube.com/embed/1Rs2ND1ryYc&details=8%20Lessons%20%E2%80%A2%20Unlocked" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/business-people-working-laptop_23-2148908912.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Optimizing User Experience with the Best UI/UX Design</div>
+                <div class="text-muted small mb-1">8 Lessons</div>
+                <span class="badge bg-success">Unlocked</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Branding%20and%20Refresh%20Company%20Image&video=https://www.youtube.com/embed/3tYpD5z4lPY&details=6%20Lessons%20%E2%80%A2%20Watching" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/marketing-strategy-planning-strategy-concept_53876-42950.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Branding and Refresh Company Image</div>
+                <div class="text-muted small mb-1">6 Lessons</div>
+                <span class="badge bg-warning text-dark">Watching</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Mastering%20JavaScript%20for%20Web%20Development&video=https://www.youtube.com/embed/PkZNo7MFNFg&details=15%20Lessons%20%E2%80%A2%20New" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/javascript-programming-language-concept_23-2150402007.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Mastering JavaScript for Web Development</div>
+                <div class="text-muted small mb-1">15 Lessons</div>
+                <span class="badge bg-info text-dark">New</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Advanced%20CSS%20Animations%20and%20Transitions&video=https://www.youtube.com/embed/cbSrsYiRamo&details=10%20Lessons%20%E2%80%A2%20In%20Progress" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/abstract-technology-background_23-2148897676.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Advanced CSS Animations and Transitions</div>
+                <div class="text-muted small mb-1">10 Lessons</div>
+                <span class="badge bg-secondary">In Progress</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=React%20Basics%3A%20Building%20Your%20First%20App&video=https://www.youtube.com/embed/bMknfKXIFA8&details=9%20Lessons%20%E2%80%A2%20In%20Progress" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/modern-laptop-table_23-2148219270.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">React Basics: Building Your First App</div>
+                <div class="text-muted small mb-1">9 Lessons</div>
+                <span class="badge bg-primary">In Progress</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Python%20for%20Beginners&video=https://www.youtube.com/embed/_uQrJ0TkZlc&details=14%20Lessons%20%E2%80%A2%20New" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/close-up-programmer-working-with-codes_23-2150010125.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Python for Beginners</div>
+                <div class="text-muted small mb-1">14 Lessons</div>
+                <span class="badge bg-info text-dark">New</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Data%20Structures%20and%20Algorithms&video=https://www.youtube.com/embed/8hly31xKli0&details=12%20Lessons%20%E2%80%A2%20In%20Progress" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/abstract-technology-background_23-2148897676.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Data Structures and Algorithms</div>
+                <div class="text-muted small mb-1">12 Lessons</div>
+                <span class="badge bg-secondary">In Progress</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Introduction%20to%20Databases&video=https://www.youtube.com/embed/h0nxCDiD-zg&details=10%20Lessons%20%E2%80%A2%20Unlocked" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/database-concept-with-person-using-laptop_23-2150323537.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Introduction to Databases</div>
+                <div class="text-muted small mb-1">10 Lessons</div>
+                <span class="badge bg-success">Unlocked</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Machine%20Learning%20Basics&video=https://www.youtube.com/embed/GwIo3gDZCVQ&details=11%20Lessons%20%E2%80%A2%20Watching" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/ai-cloud-concept-with-robot-arm_23-2149739748.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Machine Learning Basics</div>
+                <div class="text-muted small mb-1">11 Lessons</div>
+                <span class="badge bg-warning text-dark">Watching</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Cloud%20Computing%20Essentials&video=https://www.youtube.com/embed/2LaAJq1lB1Q&details=8%20Lessons%20%E2%80%A2%20In%20Progress" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/cloud-technology-concept_23-2149193477.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Cloud Computing Essentials</div>
+                <div class="text-muted small mb-1">8 Lessons</div>
+                <span class="badge bg-secondary">In Progress</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 course-card">
+            <a href="video.html?title=Cybersecurity%20Fundamentals&video=https://www.youtube.com/embed/1i8bQA6w4n4&details=7%20Lessons%20%E2%80%A2%20Unlocked" style="text-decoration:none;color:inherit;">
+              <div class="stat-card lesson-card" style="cursor:pointer;">
+                <img src="https://img.freepik.com/free-photo/cyber-security-concept_23-2148532223.jpg?w=400" class="card-thumb">
+                <div class="fw-bold">Cybersecurity Fundamentals</div>
+                <div class="text-muted small mb-1">7 Lessons</div>
+                <span class="badge bg-success">Unlocked</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div id="noResultsMsg" class="text-center text-muted mt-3" style="display:none;">No results found.</div>
+      </div>
+      <!-- Remove the 'Your Lesson' section entirely -->
+    </div>
+    <!-- Right Sidebar: Stats & Mentor -->
+    <div class="d-none d-xl-block" style="width:320px;padding:32px 16px 0 0;">
+      <div class="stat-card mb-4 text-center">
+        <img src="https://randomuser.me/api/portraits/men/12.jpg" class="profile-pic mb-2" style="width:60px;height:60px;display:none;">
+        <div class="fw-bold">Good Morning, <span id="dashboardGreetingName">Jason</span> <span style="font-size:1.2em;">🔥</span></div>
+        <div class="text-muted small mb-2">Continue learning and accomplish your goal!</div>
+        <div class="d-flex align-items-end justify-content-center gap-2 mt-3">
+          <div style="width:40px;height:60px;background:#e0e7ff;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;">
+            <div style="width:20px;height:30px;background:#6366f1;border-radius:4px;"></div>
+          </div>
+          <div style="width:40px;height:60px;background:#e0e7ff;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;">
+            <div style="width:20px;height:45px;background:#6366f1;border-radius:4px;"></div>
+          </div>
+          <div style="width:40px;height:60px;background:#e0e7ff;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;">
+            <div style="width:20px;height:25px;background:#6366f1;border-radius:4px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card mb-4">
+        <div class="fw-bold mb-2">Your Mentor</div>
+        <div class="d-flex align-items-center mb-2">
+          <div>
+            <div class="fw-bold">Pashang Sario</div>
+            <div class="text-muted small">24 Lessons</div>
+          </div>
+          <button class="btn btn-outline-primary btn-sm ms-auto">Follow</button>
+        </div>
+        <div class="d-flex align-items-center mb-2">
+          <div>
+            <div class="fw-bold">Shorany</div>
+            <div class="text-muted small">18 Lessons</div>
+          </div>
+          <button class="btn btn-outline-primary btn-sm ms-auto">Follow</button>
+        </div>
+        <div class="d-flex align-items-center mb-2">
+          <div>
+            <div class="fw-bold">Leonard Samuel</div>
+            <div class="text-muted small">12 Lessons</div>
+          </div>
+          <button class="btn btn-outline-primary btn-sm ms-auto">Follow</button>
+        </div>
+        <div class="text-end mt-2"><a href="#" class="text-primary small">See All</a></div>
+      </div>
+      <!-- Attendance Graph -->
+      <div class="stat-card mb-4" id="attendanceCard" style="cursor:pointer;">
+        <div class="fw-bold mb-2">Attendance (Last 7 Days) - <span id="attendanceUserName">User</span></div>
+        <div class="d-flex align-items-end justify-content-between" style="height:120px;" id="attendanceBars">
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="1" style="height:80px;background:#6366f1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Mon</div>
+          </div>
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="1" style="height:100px;background:#6366f1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Tue</div>
+          </div>
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="0" style="height:60px;background:#cbd5e1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Wed</div>
+          </div>
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="1" style="height:110px;background:#6366f1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Thu</div>
+          </div>
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="1" style="height:90px;background:#6366f1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Fri</div>
+          </div>
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="0" style="height:70px;background:#cbd5e1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Sat</div>
+          </div>
+          <div class="text-center" style="width:12%;">
+            <div class="attendance-bar" data-present="1" style="height:100px;background:#6366f1;border-radius:6px 6px 0 0;"></div>
+            <div class="small mt-1">Sun</div>
+          </div>
+        </div>
+        <div class="text-muted small mt-2">Purple = Present, Gray = Absent</div>
+        <div id="attendanceMsg" class="mt-2 fw-bold text-danger" style="display:none;">Your attendance is low</div>
+      </div>
+      <!-- Attendance Modal -->
+      <div class="modal fade" id="attendanceModal" tabindex="-1" aria-labelledby="attendanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="attendanceModalLabel">Attendance Status</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="attendanceModalBody"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Motivational Quote / Daily Tip -->
+      <div class="stat-card mb-4">
+        <div class="fw-bold mb-2">Motivational Quote</div>
+        <div class="fst-italic">“Success is not the key to happiness. Happiness is the key to success.”</div>
+        <div class="text-muted small mt-2">Tip: Stay consistent and keep learning every day!</div>
+      </div>
+      <!-- Progress Summary -->
+      <div class="stat-card mb-4">
+        <div class="fw-bold mb-2">Progress Summary</div>
+        <div class="mb-2">You’ve completed <span class="fw-bold" id="lessonsCompleted">0</span> out of <span class="fw-bold" id="lessonsTotal">6</span> lessons this week!</div>
+        <div class="progress" style="height: 8px;">
+          <div class="progress-bar bg-success" id="progressBar" role="progressbar" style="width: 0%"></div>
+        </div>
+      </div>
+      <!-- Upcoming Events / Deadlines -->
+      <div class="stat-card mb-4">
+        <div class="fw-bold mb-2">Upcoming Events</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0">UI/UX Assignment Due <span class="badge bg-warning text-dark ms-2">Tomorrow</span></li>
+          <li class="list-group-item px-0">Live Q&A Session <span class="badge bg-info text-dark ms-2">Fri 5pm</span></li>
+          <li class="list-group-item px-0">Project Submission <span class="badge bg-danger ms-2">Mon</span></li>
+          <li class="list-group-item px-0">Hackathon Registration <span class="badge bg-primary ms-2">Opens Sat</span></li>
+          <li class="list-group-item px-0">Career Fair <span class="badge bg-success ms-2">Next Wed</span></li>
+          <li class="list-group-item px-0">Team Meeting <span class="badge bg-secondary ms-2">Thu 3pm</span></li>
+          <li class="list-group-item px-0">Feedback Survey <span class="badge bg-info text-dark ms-2">Due Sun</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="profileModalLabel">Profile Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img src="https://randomuser.me/api/portraits/men/12.jpg" class="profile-pic mb-2" style="width:70px;height:70px;display:none;">
+          <h5 class="fw-bold mb-1" id="modalProfileName">Name</h5>
+          <div class="mb-1"><strong>Age:</strong> <span id="modalProfileAge">28</span></div>
+          <div class="mb-1"><strong>Address:</strong> <span id="modalProfileAddress">123 Main Street, New York, NY</span></div>
+          <div class="mb-1"><strong>Email:</strong> <span id="modalProfileEmail">user@example.com</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Task Modal -->
+  <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskModalLabel">Assigned Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="taskModalBody">
+          <!-- Task content will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Inbox Modal -->
+  <div class="modal fade" id="inboxModal" tabindex="-1" aria-labelledby="inboxModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inboxModalLabel">Completed Works</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="inboxModalBody">
+          <!-- Completed works will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Friend Details Modal at the end of body -->
+  <div class="modal fade" id="friendModal" tabindex="-1" aria-labelledby="friendModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="friendModalLabel">Friend Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="friendModalImg" src="" class="profile-pic mb-2" style="width:70px;height:70px;display:none;">
+          <h5 class="fw-bold mb-1" id="friendModalName"></h5>
+          <div class="mb-1"><strong>Email:</strong> <span id="friendModalEmail"></span></div>
+          <div class="mb-1"><strong>Location:</strong> <span id="friendModalLocation"></span></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="connectFriendBtn">Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+document.getElementById('courseSearch').addEventListener('input', function() {
+  const search = this.value.toLowerCase();
+  const cards = document.querySelectorAll('.course-card');
+  let anyVisible = false;
+  cards.forEach(card => {
+    const title = card.getAttribute('data-title').toLowerCase();
+    if (title.includes(search)) {
+      card.style.display = '';
+      anyVisible = true;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  document.getElementById('noResultsMsg').style.display = anyVisible ? 'none' : '';
+});
+
+document.getElementById('taskSidebar').addEventListener('click', function(e) {
+  e.preventDefault();
+  const lastLesson = localStorage.getItem('lastWatchedLesson');
+  let taskMsg = '';
+  if (lastLesson) {
+    taskMsg = `Your task: Write a summary or complete an exercise based on <b>"${lastLesson}"</b>.`;
+  } else {
+    taskMsg = 'Please watch a lesson video first to get a task assigned.';
+  }
+  document.getElementById('taskModalBody').innerHTML = taskMsg;
+  const modal = new bootstrap.Modal(document.getElementById('taskModal'));
+  modal.show();
+});
+
+document.getElementById('inboxSidebar').addEventListener('click', function(e) {
+  e.preventDefault();
+  let completed = JSON.parse(localStorage.getItem('completedLessons') || '[]');
+  let html = '';
+  if (completed.length > 0) {
+    html = '<ul class="list-group">' + completed.map(title => `<li class='list-group-item d-flex justify-content-between align-items-center'>${title}<span class='badge bg-success'>Completed</span></li>`).join('') + '</ul>';
+  } else {
+    html = '<div class="text-muted">No completed works yet.</div>';
+  }
+  document.getElementById('inboxModalBody').innerHTML = html;
+  const modal = new bootstrap.Modal(document.getElementById('inboxModal'));
+  modal.show();
+});
+
+document.getElementById('goToEducate').addEventListener('click', function() {
+  window.location.href = 'educate.html';
+});
+
+// Show blue dot on bell when profile is viewed
+const profileSection = document.getElementById('profileSection');
+const notifDot = document.getElementById('notifDot');
+const notifBell = document.getElementById('notifBell');
+profileSection.addEventListener('click', function() {
+  notifDot.style.display = 'block';
+});
+notifBell.addEventListener('click', function() {
+  notifDot.style.display = 'none';
+});
+
+// Attendance feedback message and attendance bars based on completed lessons
+(function() {
+  const bars = document.querySelectorAll('.attendance-bar');
+  let present = 0;
+  let completed = 0;
+  try {
+    completed = JSON.parse(localStorage.getItem('completedLessons') || '[]').length;
+  } catch {}
+  bars.forEach((bar, idx) => {
+    if (idx < completed) {
+      bar.style.background = '#6366f1';
+      bar.setAttribute('data-present', '1');
+    } else {
+      bar.style.background = '#cbd5e1';
+      bar.setAttribute('data-present', '0');
+    }
+    if (bar.getAttribute('data-present') === '1') present++;
+  });
+  if (present < 5) {
+    document.getElementById('attendanceMsg').style.display = '';
+  } else {
+    document.getElementById('attendanceMsg').style.display = 'none';
+  }
+})();
+
+// Progress summary logic
+(function() {
+  const total = 6;
+  let completed = 0;
+  try {
+    completed = JSON.parse(localStorage.getItem('completedLessons') || '[]').length;
+  } catch {}
+  document.getElementById('lessonsCompleted').textContent = completed;
+  document.getElementById('lessonsTotal').textContent = total;
+  const percent = Math.min(100, Math.round((completed / total) * 100));
+  document.getElementById('progressBar').style.width = percent + '%';
+})();
+
+document.getElementById('attendanceCard').addEventListener('click', function() {
+  const bars = document.querySelectorAll('.attendance-bar');
+  let present = 0;
+  bars.forEach(bar => { if (bar.getAttribute('data-present') === '1') present++; });
+  const percent = (present / 7) * 100;
+  let msg = '';
+  if (percent >= 75) {
+    msg = '<span class="text-success fw-bold">Your attendance is good.</span>';
+  } else {
+    msg = '<span class="text-danger fw-bold">Your attendance is below 75%. Attend the class!</span>';
+  }
+  document.getElementById('attendanceModalBody').innerHTML = msg;
+  const modal = new bootstrap.Modal(document.getElementById('attendanceModal'));
+  modal.show();
+});
+
+// Fill profile modal with user details from localStorage
+const profileModal = document.getElementById('profileModal');
+profileModal.addEventListener('show.bs.modal', function () {
+  const name = localStorage.getItem('signedUpName') || 'Name';
+  const email = localStorage.getItem('signedUpEmail') || 'user@example.com';
+  document.getElementById('modalProfileName').textContent = name;
+  document.getElementById('modalProfileEmail').textContent = email;
+  // You can add similar logic for age/address if you collect them
+});
+
+// Set dashboard and sidebar name from localStorage
+(function() {
+  const name = localStorage.getItem('signedUpName') || 'User';
+  if (document.getElementById('dashboardGreetingName')) {
+    document.getElementById('dashboardGreetingName').textContent = name;
+  }
+  if (document.getElementById('sidebarProfileName')) {
+    document.getElementById('sidebarProfileName').textContent = name;
+  }
+  if (document.getElementById('attendanceUserName')) {
+    document.getElementById('attendanceUserName').textContent = name;
+  }
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Friend details modal logic
+  const friendItems = document.querySelectorAll('.friend-item');
+  const friendModalEl = document.getElementById('friendModal');
+  let friendModal;
+  if (window.bootstrap) {
+    friendModal = new bootstrap.Modal(friendModalEl);
+  } else {
+    friendModal = new window.bootstrap.Modal(friendModalEl);
+  }
+  friendItems.forEach(item => {
+    item.addEventListener('click', function() {
+      document.getElementById('friendModalImg').src = this.getAttribute('data-img');
+      document.getElementById('friendModalName').textContent = this.getAttribute('data-name');
+      document.getElementById('friendModalEmail').textContent = this.getAttribute('data-email');
+      document.getElementById('friendModalLocation').textContent = this.getAttribute('data-location');
+      friendModal.show();
+    });
+  });
+  document.getElementById('connectFriendBtn').addEventListener('click', function() {
+    friendModal.hide();
+    setTimeout(function() {
+      // Confetti burst
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      // Show a message (toast)
+      const msg = document.createElement('div');
+      msg.textContent = 'Friends made!';
+      msg.style.position = 'fixed';
+      msg.style.top = '30px';
+      msg.style.left = '50%';
+      msg.style.transform = 'translateX(-50%)';
+      msg.style.background = '#4ade80';
+      msg.style.color = '#222';
+      msg.style.padding = '12px 32px';
+      msg.style.borderRadius = '24px';
+      msg.style.fontWeight = 'bold';
+      msg.style.zIndex = 9999;
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 2000);
+    }, 400);
+  });
+});
+</script>
+  <!-- Add Bootstrap JS for modal functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

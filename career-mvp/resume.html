@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Analyzer – Educate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background: #f8f9fb; }
+    .resume-section {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.07);
+      padding: 2.5rem 2rem 2rem 2rem;
+      margin: 2.5rem auto;
+      max-width: 600px;
+      text-align: center;
+    }
+    .suggestion-list {
+      text-align: left;
+      margin-top: 1.5rem;
+    }
+    .suggestion-list li {
+      margin-bottom: 0.7rem;
+      font-size: 1.05rem;
+      color: #333;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .suggestion-list i {
+      color: #6d28d9;
+      font-size: 1.1rem;
+      margin-top: 0.15rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="resume-section">
+      <h2 class="mb-3">Upload & Analyze Your Resume</h2>
+      <form id="resumeForm">
+        <input type="file" class="form-control mb-3" id="resumeFile" accept=".pdf,.doc,.docx" required>
+        <button type="submit" class="btn btn-primary">Analyze Resume</button>
+      </form>
+      <div id="analysisResult" class="mt-4" style="display:none;">
+        <h5>Resume Analysis Feedback:</h5>
+        <div id="resumeSummary" class="mb-3 text-muted"></div>
+        <div id="detectedSections" class="mb-3"></div>
+        <ol class="suggestion-list" id="suggestionList">
+          <!-- Suggestions will appear here as numbered points -->
+        </ol>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.0.0/mammoth.browser.min.js"></script>
+  <script>
+    function analyzeResumeText(text) {
+      const found = {
+        summary: /summary|objective/i.test(text),
+        skills: /skill/i.test(text),
+        education: /education/i.test(text),
+        experience: /experience|employment|work history/i.test(text)
+      };
+      let detected = '<b>Detected Sections:</b> ';
+      detected += found.summary ? '✅ Summary/Objective, ' : '❌ Summary/Objective, ';
+      detected += found.skills ? '✅ Skills, ' : '❌ Skills, ';
+      detected += found.education ? '✅ Education, ' : '❌ Education, ';
+      detected += found.experience ? '✅ Experience' : '❌ Experience';
+      const suggestions = [];
+      if (!found.summary) {
+        suggestions.push('Consider adding a professional summary or objective at the top of your resume.');
+      }
+      if (!found.skills) {
+        suggestions.push('Include a skills section to highlight your key abilities.');
+      }
+      if (!found.education) {
+        suggestions.push('Add an education section with your academic background.');
+      }
+      if (!found.experience) {
+        suggestions.push('List your work experience or employment history.');
+      }
+      if (text.length < 500) {
+        suggestions.push('Your resume seems a bit short. Try to add more details about your achievements and responsibilities.');
+      }
+      if (suggestions.length === 0) {
+        suggestions.push('Great job! Your resume covers all the essential sections. 👍');
+      }
+      return {detected, suggestions};
+    }
+
+    document.getElementById('resumeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('resumeFile');
+      const file = fileInput.files[0];
+      let summary = '';
+      if (file) {
+        summary = `File: <b>${file.name}</b> &nbsp; | &nbsp; Type: <b>${file.type || 'Unknown'}</b> &nbsp; | &nbsp; Size: <b>${(file.size/1024).toFixed(1)} KB</b>`;
+      }
+      document.getElementById('resumeSummary').innerHTML = summary;
+      const list = document.getElementById('suggestionList');
+      list.innerHTML = '';
+      document.getElementById('analysisResult').style.display = '';
+      // PDF parsing
+      if (file && file.type === 'application/pdf') {
+        const reader = new FileReader();
+        reader.onload = function() {
+          const typedarray = new Uint8Array(this.result);
+          pdfjsLib.getDocument({data: typedarray}).promise.then(function(pdf) {
+            let textContent = '';
+            let loadPage = function(pageNum) {
+              pdf.getPage(pageNum).then(function(page) {
+                page.getTextContent().then(function(content) {
+                  textContent += content.items.map(item => item.str).join(' ') + ' ';
+                  if (pageNum < pdf.numPages) {
+                    loadPage(pageNum + 1);
+                  } else {
+                    showSuggestions(analyzeResumeText(textContent));
+                  }
+                });
+              });
+            };
+            loadPage(1);
+          }, function() {
+            showSuggestions({detected: '', suggestions: ['Could not read PDF file.']});
+          });
+        };
+        reader.readAsArrayBuffer(file);
+      }
+      // DOCX parsing
+      else if (file && (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.name.endsWith('.docx'))) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          mammoth.extractRawText({arrayBuffer: event.target.result})
+            .then(function(result) {
+              showSuggestions(analyzeResumeText(result.value));
+            })
+            .catch(function() {
+              showSuggestions({detected: '', suggestions: ['Could not read DOCX file.']});
+            });
+        };
+        reader.readAsArrayBuffer(file);
+      }
+      // Fallback for unsupported file types
+      else {
+        showSuggestions({detected: '', suggestions: ['Please upload a PDF or DOCX resume.']});
+      }
+      function showSuggestions(result) {
+        document.getElementById('detectedSections').innerHTML = result.detected || '';
+        list.innerHTML = '';
+        result.suggestions.forEach((s, idx) => {
+          const li = document.createElement('li');
+          li.textContent = s;
+          list.appendChild(li);
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

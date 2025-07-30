@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog – Educate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f8f9fb; }
+    .blog-hero {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem 2rem 2rem;
+      margin: 2.5rem auto 2rem auto;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.07);
+    }
+    .blog-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+    .blog-desc {
+      font-size: 1.15rem;
+      color: #e0e7ff;
+      margin-bottom: 0.5rem;
+    }
+    .blog-list {
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+    }
+    .blog-post {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.06);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.18s;
+    }
+    .blog-post:hover {
+      box-shadow: 0 6px 24px 0 rgba(31, 38, 135, 0.13);
+    }
+    .blog-post-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #6d28d9;
+      margin-bottom: 0.3rem;
+    }
+    .blog-post-date {
+      color: #888;
+      font-size: 0.98rem;
+      margin-bottom: 0.7rem;
+    }
+    .blog-post-desc {
+      color: #444;
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+    }
+    .read-more {
+      color: #6d28d9;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .read-more:hover { text-decoration: underline; }
+    .animate-enlarge {
+      animation: enlargeFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes enlargeFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .blog-post .read-more {
+      display: inline-block;
+      margin-top: auto;
+      margin-left: auto;
+      text-align: right;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="blog-hero">
+      <div class="blog-title">Educate Blog</div>
+      <div class="blog-desc">Lively updates, study tips, and the latest in education and careers!</div>
+    </div>
+    <div class="blog-list row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="blog-post card h-100" data-title="How to Stay Motivated During Exam Season" data-date="April 27, 2024" data-content="Discover practical strategies to keep your motivation high and stress low as you prepare for your exams. Learn how to set goals, manage your time, and stay positive!" data-long-content="Discover practical strategies to keep your motivation high and stress low as you prepare for your exams. Learn how to set goals, manage your time, and stay positive!\n\nTips include: breaking your study into manageable chunks, rewarding yourself for progress, staying connected with peers, and practicing mindfulness. Remember, consistency is key and taking care of your mental health is just as important as your studies.">
+          <div class="card-body">
+            <div class="blog-post-title card-title">How to Stay Motivated During Exam Season</div>
+            <div class="blog-post-date">April 27, 2024</div>
+            <div class="blog-post-desc card-text">Discover practical strategies to keep your motivation high and stress low as you prepare for your exams. Learn how to set goals, manage your time, and stay positive!</div>
+            <a href="#" class="read-more ms-auto">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="blog-post card h-100" data-title="Top 5 Online Resources for GATE & UPSC Preparation" data-date="April 25, 2024" data-content="Explore the best free and paid online resources to boost your GATE and UPSC exam prep, including video lectures, practice tests, and expert forums." data-long-content="Explore the best free and paid online resources to boost your GATE and UPSC exam prep, including video lectures, practice tests, and expert forums.\n\nOur top picks: NPTEL for video lectures, Insights on India for current affairs, Testbook for mock tests, and official exam portals for authentic materials. Mix and match resources to suit your learning style.">
+          <div class="card-body">
+            <div class="blog-post-title card-title">Top 5 Online Resources for GATE & UPSC Preparation</div>
+            <div class="blog-post-date">April 25, 2024</div>
+            <div class="blog-post-desc card-text">Explore the best free and paid online resources to boost your GATE and UPSC exam prep, including video lectures, practice tests, and expert forums.</div>
+            <a href="#" class="read-more ms-auto">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="blog-post card h-100" data-title="Success Stories: From Campus to Career" data-date="April 20, 2024" data-content="Be inspired by real stories of students who cracked competitive exams and landed their dream jobs. Learn from their journeys and tips!" data-long-content="Be inspired by real stories of students who cracked competitive exams and landed their dream jobs. Learn from their journeys and tips!\n\nFeatured: Priya Sharma (UPSC Topper), Arjun Patel (GATE AIR 12), and Michael Chen (Bank PO). Each shares their unique approach, challenges, and advice for future aspirants.">
+          <div class="card-body">
+            <div class="blog-post-title card-title">Success Stories: From Campus to Career</div>
+            <div class="blog-post-date">April 20, 2024</div>
+            <div class="blog-post-desc card-text">Be inspired by real stories of students who cracked competitive exams and landed their dream jobs. Learn from their journeys and tips!</div>
+            <a href="#" class="read-more ms-auto">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="blog-post card h-100" data-title="Why Soft Skills Matter in the Modern Workplace" data-date="April 15, 2024" data-content="Technical knowledge is important, but soft skills like communication, teamwork, and adaptability are key to long-term success. Find out how to develop them." data-long-content="Technical knowledge is important, but soft skills like communication, teamwork, and adaptability are key to long-term success. Find out how to develop them.\n\nThis post covers: the most in-demand soft skills, how to practice them, and real examples of how they impact career growth. Includes exercises and book recommendations for improvement.">
+          <div class="card-body">
+            <div class="blog-post-title card-title">Why Soft Skills Matter in the Modern Workplace</div>
+            <div class="blog-post-date">April 15, 2024</div>
+            <div class="blog-post-desc card-text">Technical knowledge is important, but soft skills like communication, teamwork, and adaptability are key to long-term success. Find out how to develop them.</div>
+            <a href="#" class="read-more ms-auto">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="blog-post card h-100" data-title="How to Build a Winning Resume for Freshers" data-date="April 10, 2024" data-content="Learn the essentials of crafting a resume that stands out, even if you have little or no work experience." data-long-content="Learn the essentials of crafting a resume that stands out, even if you have little or no work experience.\n\nThis post covers: choosing the right format, highlighting your education and projects, using keywords, and avoiding common mistakes. Includes a downloadable sample resume template.">
+          <div class="card-body">
+            <div class="blog-post-title card-title">How to Build a Winning Resume for Freshers</div>
+            <div class="blog-post-date">April 10, 2024</div>
+            <div class="blog-post-desc card-text">Learn the essentials of crafting a resume that stands out, even if you have little or no work experience.</div>
+            <a href="#" class="read-more ms-auto">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="blog-post card h-100" data-title="Mastering Time Management for Students" data-date="April 5, 2024" data-content="Time management is a crucial skill for academic and career success. Discover proven techniques to make the most of your day." data-long-content="Time management is a crucial skill for academic and career success. Discover proven techniques to make the most of your day.\n\nTopics include: prioritizing tasks, using planners and apps, overcoming procrastination, and balancing study with relaxation. Includes a printable weekly planner PDF.">
+          <div class="card-body">
+            <div class="blog-post-title card-title">Mastering Time Management for Students</div>
+            <div class="blog-post-date">April 5, 2024</div>
+            <div class="blog-post-desc card-text">Time management is a crucial skill for academic and career success. Discover proven techniques to make the most of your day.</div>
+            <a href="#" class="read-more ms-auto">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Blog Modal -->
+    <div class="modal fade" id="blogModal" tabindex="-1" aria-labelledby="blogModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="modal-content animate-enlarge" style="background:#f8f9fb;">
+          <div class="modal-header border-0" style="background:#fff;">
+            <h2 class="modal-title w-100 text-center fw-bold" id="blogModalLabel" style="font-size:2.2rem;"></h2>
+            <button type="button" class="btn-close position-absolute end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="blogModalBody" style="max-width:700px;margin:0 auto;padding:2.5rem 1.5rem 2rem 1.5rem;background:#fff;border-radius:1.2rem;box-shadow:0 2px 12px 0 rgba(31,38,135,0.06);">
+            <!-- Blog content will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.querySelectorAll('.blog-post').forEach(function(card) {
+      card.style.cursor = 'pointer';
+      function showModal() {
+        document.getElementById('blogModalLabel').textContent = card.getAttribute('data-title');
+        document.getElementById('blogModalBody').innerHTML = `
+          <div class='blog-post-date mb-3' style='font-size:1.1rem;color:#6d28d9;'>${card.getAttribute('data-date')}</div>
+          <div class='blog-post-article' style='font-size:1.18rem;line-height:1.8;color:#222;white-space:pre-line;'>${card.getAttribute('data-long-content')}</div>
+        `;
+        var modal = new bootstrap.Modal(document.getElementById('blogModal'));
+        modal.show();
+      }
+      card.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('read-more')) showModal();
+      });
+      var readMore = card.querySelector('.read-more');
+      if (readMore) {
+        readMore.addEventListener('click', function(e) {
+          e.preventDefault();
+          showModal();
+        });
+      }
+    });
+  </script>
+</body>
+</html> 
