@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NexaSphere Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-card {
+      background: white;
+      padding: 2rem;
+      width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-card h2 {
+      color: #2c2c7c;
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .login-card p {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .login-card .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .login-card .row label {
+      display: flex;
+      align-items: center;
+    }
+
+    .login-card .row a {
+      text-decoration: none;
+      color: #5c67f2;
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .login-card .divider {
+      text-align: center;
+      margin: 10px 0;
+      color: #aaa;
+    }
+
+    .login-card .social-icons {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .login-card .social-icons a img {
+      width: 50px;
+      height: 50px;
+      padding: 8px;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+      transition: transform 0.2s;
+    }
+
+    .login-card .social-icons a img:hover {
+      transform: scale(1.1);
+    }
+
+    .login-card .signup {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .login-card .signup a {
+      color: #5c67f2;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h2>Welcome to<br><strong>NexaSphere</strong></h2>
+    <p>Please enter your details to sign in</p>
+
+    <input type="text" placeholder="Full Name" />
+    <input type="email" placeholder="Email Address" />
+    <input type="password" placeholder="Password" />
+
+    <div class="row">
+      <label><input type="checkbox" /> Remember me</label>
+      <a href="#">Forgot password?</a>
+    </div>
+
+    <button>Sign In</button>
+
+    <div class="divider">or continue with</div>
+
+    <div class="social-icons">
+      <a href="https://www.google.com" target="_blank">
+        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" />
+      </a>
+      <a href="https://www.facebook.com" target="_blank">
+        <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
+      </a>
+      <a href="https://www.microsoft.com" target="_blank">
+        <img src="https://img.icons8.com/color/48/000000/microsoft.png" alt="Microsoft" />
+      </a>
+      <a href="https://www.linkedin.com" target="_blank">
+        <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn" />
+      </a>
+    </div>
+
+    <div class="signup">
+      Don’t have an account? <a href="#">Sign up for free</a>
+    </div>
+  </div>
+</body>
+</html>
