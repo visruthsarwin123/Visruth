@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career Web App - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-animated">
+  <div class="split-container">                                           
+    <div class="split-card">
+      <!-- Left Panel: Welcome Back -->
+      <div class="left-panel">
+        <h2>Welcome Back!</h2>
+        <p>To keep connected with us please login<br>with your personal info</p>
+        <button class="sign-in-btn" onclick="showLoginForm()">SIGN IN</button>
+      </div>
+      <!-- Right Panel: Create Account -->
+      <div class="right-panel">
+        <h2>Create Account</h2>
+        <div class="social-icons mb-2">
+          <span class="social-icon"><i class="fab fa-facebook-f"></i></span>
+          <span class="social-icon"><i class="fab fa-google"></i></span>
+          <span class="social-icon"><i class="fab fa-linkedin-in"></i></span>
+        </div>
+        <div class="mb-2 text-muted" style="font-size:0.95rem;">or use your email for registration</div>
+        <form onsubmit="return signupUser(event)" style="width:100%;max-width:320px;">
+          <input type="text" class="form-control" id="signupName" placeholder="Name" required>
+          <input type="email" class="form-control" id="signupEmail" placeholder="Email" required>
+          <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+          <button type="submit" class="signup-btn w-100 mt-2">SIGN UP</button>
+        </form>
+        <!-- Hidden Login Form (shows on SIGN IN click) -->
+        <div id="loginNameDisplay" style="display:none; font-weight:bold; text-align:center; margin-bottom:10px;"></div>
+        <form id="loginForm" onsubmit="return loginUser(event)" style="width:100%;max-width:320px;display:none;">
+          <h2 class="mt-2 mb-2" style="color:#222;">Sign In</h2>
+          <input type="text" class="form-control" id="loginName" placeholder="Name" required>
+          <input type="email" class="form-control" id="loginEmail" placeholder="Email" required>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+          <button type="submit" class="signup-btn w-100 mt-2" style="background:#0ea5e9;">SIGN IN</button>
+          <div class="text-center mt-2">
+            <a href="#" onclick="showSignupForm();return false;" style="color:#0ea5e9;font-size:0.95rem;">Don't have an account? Sign up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="assets/script.js"></script>
+  <script>
+    function showLoginForm() {
+      document.querySelector('.right-panel form').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    }
+    function showSignupForm() {
+      document.querySelector('.right-panel form').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+    }
+  </script>
+</body>
+</html> 

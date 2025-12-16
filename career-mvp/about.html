@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us – Educate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background: #f8f9fb; }
+    .about-hero {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.07);
+      padding: 3rem 2rem 2rem 2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .about-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #6d28d9;
+      margin-bottom: 1rem;
+    }
+    .about-desc {
+      color: #444;
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+    }
+    .about-values {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.06);
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .about-values h3 {
+      color: #222;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .about-values ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .about-values li {
+      margin-bottom: 0.7rem;
+      font-size: 1.05rem;
+      color: #333;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .about-values i {
+      color: #6d28d9;
+      font-size: 1.1rem;
+      margin-top: 0.15rem;
+    }
+    .about-team {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.06);
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .about-team h3 {
+      color: #222;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .team-member {
+      display: inline-block;
+      margin: 0 1.2rem 1.2rem 1.2rem;
+      text-align: center;
+    }
+    .team-member img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 2px 8px 0 rgba(109,40,217,0.08);
+    }
+    .team-member .name {
+      font-weight: 600;
+      color: #6d28d9;
+    }
+    .team-member .role {
+      color: #555;
+      font-size: 0.98rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="about-hero">
+      <div class="about-title">About Educate</div>
+      <div class="about-desc">
+        Educate is a modern platform dedicated to empowering learners and educators worldwide. Our mission is to make high-quality education accessible, engaging, and effective for everyone.<br>
+        We believe in the power of technology to transform learning and help individuals achieve their goals.
+      </div>
+    </div>
+    <div class="about-values mb-4">
+      <h3>Our Core Values</h3>
+      <ul>
+        <li><i class="fas fa-check-circle"></i> Commitment to Excellence in Education</li>
+        <li><i class="fas fa-check-circle"></i> Innovation in Learning Methods</li>
+        <li><i class="fas fa-check-circle"></i> Inclusivity and Diversity</li>
+        <li><i class="fas fa-check-circle"></i> Lifelong Learning for All</li>
+        <li><i class="fas fa-check-circle"></i> Supportive Community</li>
+      </ul>
+    </div>
+    <div class="about-team">
+      <h3>Meet Our Team</h3>
+      <div class="team-member" data-name="Arjun Patel" data-role="Founder & CEO" data-img="https://randomuser.me/api/portraits/men/32.jpg" data-bio="Arjun is passionate about making education accessible for all. With over 10 years of experience in edtech, he leads Educate with vision and heart.">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member">
+        <div class="name">Arjun Patel</div>
+        <div class="role">Founder & CEO</div>
+      </div>
+      <div class="team-member" data-name="Priya Sharma" data-role="Head of Learning" data-img="https://randomuser.me/api/portraits/women/44.jpg" data-bio="Priya designs innovative learning experiences and ensures our courses are top quality. She believes in lifelong learning for everyone.">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member">
+        <div class="name">Priya Sharma</div>
+        <div class="role">Head of Learning</div>
+      </div>
+      <div class="team-member" data-name="Michael Chen" data-role="Lead Developer" data-img="https://randomuser.me/api/portraits/men/45.jpg" data-bio="Michael builds the technology behind Educate. He loves solving problems and making learning seamless for users.">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Team Member">
+        <div class="name">Michael Chen</div>
+        <div class="role">Lead Developer</div>
+      </div>
+      <div class="team-member" data-name="Sara Lee" data-role="Community Manager" data-img="https://randomuser.me/api/portraits/women/47.jpg" data-bio="Sara connects learners and educators, fostering a supportive and vibrant community at Educate.">
+        <img src="https://randomuser.me/api/portraits/women/47.jpg" alt="Team Member">
+        <div class="name">Sara Lee</div>
+        <div class="role">Community Manager</div>
+      </div>
+    </div>
+    <!-- Team Member Modal -->
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="teamModalLabel">Team Member</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="modalTeamImg" src="" alt="Team Member" style="width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:1rem;">
+            <h5 id="modalTeamName"></h5>
+            <div class="text-muted mb-2" id="modalTeamRole"></div>
+            <div id="modalTeamBio"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+document.querySelectorAll('.team-member').forEach(function(member) {
+  member.style.cursor = 'pointer';
+  member.addEventListener('click', function() {
+    document.getElementById('modalTeamImg').src = this.getAttribute('data-img');
+    document.getElementById('modalTeamName').textContent = this.getAttribute('data-name');
+    document.getElementById('modalTeamRole').textContent = this.getAttribute('data-role');
+    document.getElementById('modalTeamBio').textContent = this.getAttribute('data-bio');
+    var modal = new bootstrap.Modal(document.getElementById('teamModal'));
+    modal.show();
+  });
+});
+</script>
+</body>
+</html> 
