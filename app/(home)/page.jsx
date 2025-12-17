@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection'
 import GithubProjects from './components/GithubProjects'
 import SkillsSection from './components/Skills'
 import ExperienceSection from './components/Experience'
+import ResumeSection from './components/ResumeSection'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { HiArrowRight } from 'react-icons/hi'
@@ -13,6 +14,7 @@ const Home = () => {
     <div>
       <HeroSection />
       <ExperienceSection />
+      <ResumeSection />
       <GithubProjects />
       <SkillsSection />
       

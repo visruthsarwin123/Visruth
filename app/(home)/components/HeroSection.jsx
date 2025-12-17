@@ -104,6 +104,14 @@ I build web that builds brands.              </motion.span>
                 View Projects
               </Button>
             </Link>
+            <Link href="/VisruthsarwinResume.pdf" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                className="rounded-full px-6 py-6 text-base transition-all duration-300 hover:scale-105 font-semibold border-primary text-primary hover:bg-primary hover:text-white"
+              >
+                Download Resume
+              </Button>
+            </Link>
           </motion.div>
 
      
