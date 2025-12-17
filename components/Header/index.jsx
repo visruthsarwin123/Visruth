@@ -10,13 +10,15 @@ import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS = config.NAV_ITEMS;
 
-const NavLink = ({ href, label, isMobile = false }) => {
+const NavLink = ({ href, label, external = false, isMobile = false }) => {
     const pathname = usePathname();
-    const isActive = pathname === href;
+    const isActive = !external && pathname === href;
 
     return (
         <Link
             href={href}
+            target={external ? '_blank' : '_self'}
+            rel={external ? 'noopener noreferrer' : undefined}
             className="relative"
         >
             <motion.span

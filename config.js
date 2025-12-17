@@ -10,6 +10,7 @@ export const config = {
         discord: "#"
     },
     NAV_ITEMS: [
+        { href: '/VisruthsarwinResume.pdf', label: 'Resume', external: true },
         { href: '/projects', label: 'Projects' },
         { href: '/contact', label: 'Contact' }
     ],
